@@ -17,7 +17,7 @@ Machine Learning • Customer Analytics • Customer Segmentation • Business I
 
 ---
 
-## 📖 Descripción
+### 📖 Descripción
 
 Este proyecto desarrolla una solución integral de **Machine Learning** para analizar y predecir el abandono de clientes (*Customer Churn*) en una empresa de telecomunicaciones.
 
@@ -27,7 +27,7 @@ El proyecto cubre todas las etapas de un flujo de Ciencia de Datos, desde el ent
 
 ---
 
-## 📌 Contexto del problema
+### 📌 Contexto del problema
 
 Durante el periodo analizado, la empresa experimentó un incremento en la tasa de abandono de clientes, pasando del **2% al 2.5%** debido al impacto generado por la pandemia del COVID-19.
 
@@ -35,7 +35,7 @@ Considerando que adquirir un nuevo cliente resulta significativamente más costo
 
 ---
 
-## 🎯 Objetivos
+### 🎯 Objetivos
 
 - Analizar los factores relacionados con el abandono de clientes.
 - Construir un modelo predictivo de Customer Churn.
@@ -45,7 +45,7 @@ Considerando que adquirir un nuevo cliente resulta significativamente más costo
 
 ---
 
-## 🛠 Tecnologías utilizadas
+### 🛠 Tecnologías utilizadas
 
 <p align="center">
 
@@ -71,7 +71,7 @@ Considerando que adquirir un nuevo cliente resulta significativamente más costo
 
 ---
 
-# 🔄 Workflow del Proyecto
+## 🔄 Workflow del Proyecto
 
 ```text
 Business Understanding
@@ -120,9 +120,9 @@ Business Insights & Conclusions
 
 ---
 
-# 📂 Contenido del Notebook
+## 📂 Contenido del Notebook
 
-## 📌 1. Comprensión del negocio
+### 📌 1. Comprensión del negocio
 
 Se define el problema de negocio, los objetivos del proyecto y el impacto económico que representa el abandono de clientes.
 
@@ -130,7 +130,7 @@ También se desarrolla el **Machine Learning Canvas**, estableciendo los element
 
 ---
 
-## 📌 2. Análisis Exploratorio de Datos (EDA)
+### 📌 2. Análisis Exploratorio de Datos (EDA)
 
 Durante esta etapa se estudia el comportamiento general del conjunto de datos mediante estadísticas descriptivas y visualizaciones.
 
@@ -144,7 +144,7 @@ Se analizan:
 
 ---
 
-## 📌 3. Limpieza y preparación de datos
+### 📌 3. Limpieza y preparación de datos
 
 Antes del modelado se realizan diferentes tareas de preprocesamiento:
 
@@ -156,7 +156,7 @@ Antes del modelado se realizan diferentes tareas de preprocesamiento:
 
 ---
 
-## 📌 4. Detección de valores atípicos
+### 📌 4. Detección de valores atípicos
 
 Se emplean diferentes algoritmos para detectar observaciones anómalas.
 
@@ -171,7 +171,7 @@ La decisión final se obtiene considerando el consenso entre los diferentes mét
 
 ---
 
-## 📌 5. Ingeniería de características
+### 📌 5. Ingeniería de características
 
 Se generan nuevas variables que representan de mejor manera el comportamiento de los clientes y aumentan la capacidad predictiva del modelo.
 
@@ -179,24 +179,24 @@ Además, se evalúa la asociación entre variables mediante el coeficiente **V d
 
 ---
 
-## 📌 6. Reducción de dimensionalidad
+### 📌 6. Reducción de dimensionalidad
 
 Para sintetizar la información se implementan dos técnicas complementarias.
 
-### PCA
+#### PCA
 
 Aplicado sobre variables numéricas para construir componentes relacionados con:
 
 - Valor del cliente.
 - Relación entre gasto y permanencia.
 
-### MCA
+#### MCA
 
 Aplicado sobre variables categóricas para representar las categorías en un espacio reducido de dimensiones.
 
 ---
 
-## 📌 7. Segmentación de clientes
+### 📌 7. Segmentación de clientes
 
 Se implementa un modelo **K-Means** sobre las componentes obtenidas mediante PCA y MCA.
 
@@ -206,7 +206,7 @@ Uno de los grupos presenta una tasa de abandono cercana al **46%**, convirtiénd
 
 ---
 
-## 📌 8. Modelo predictivo
+### 📌 8. Modelo predictivo
 
 Se desarrolla un modelo de **Balanced Random Forest**, seleccionado por su capacidad para trabajar con clases desbalanceadas.
 
@@ -219,7 +219,7 @@ El proceso incluye:
 
 ---
 
-## 📌 9. Evaluación del modelo
+### 📌 9. Evaluación del modelo
 
 El desempeño del modelo se evalúa utilizando diferentes métricas de clasificación.
 
@@ -232,7 +232,7 @@ El desempeño del modelo se evalúa utilizando diferentes métricas de clasifica
 
 ---
 
-## ⭐ Técnicas implementadas
+### ⭐ Técnicas implementadas
 
 - Machine Learning Canvas
 - Exploratory Data Analysis (EDA)
@@ -254,7 +254,7 @@ El desempeño del modelo se evalúa utilizando diferentes métricas de clasifica
 
 ---
 
-## 💼 Valor para el negocio
+### 💼 Valor para el negocio
 
 Este proyecto permite:
 
@@ -266,7 +266,7 @@ Este proyecto permite:
 
 ---
 
-## 📁 Estructura del repositorio
+### 📁 Estructura del repositorio
 
 ```text
 Telco-Churn-Analytics/
@@ -282,7 +282,7 @@ Telco-Churn-Analytics/
 
 ---
 
-## 🚀 Cómo ejecutar el proyecto
+### 🚀 Cómo ejecutar el proyecto
 
 ```bash
 git clone https://github.com/tu-usuario/Telco-Churn-Analytics.git
@@ -296,7 +296,7 @@ Finalmente, abre el notebook ubicado en la carpeta **notebooks** y ejecuta las c
 
 ---
 
-## 👨‍💻 Autores
+### 👨‍💻 Autores
 
 **Jose Luis Garay Ramos**
 
