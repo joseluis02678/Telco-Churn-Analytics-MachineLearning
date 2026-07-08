@@ -1,0 +1,10 @@
+customerID,gender,SeniorCitizen,Partner,Dependents,tenure,PhoneService,MultipleLines,InternetService,OnlineSecurity,OnlineBackup,DeviceProtection,TechSupport,StreamingTV,StreamingMovies,Contract,PaperlessBilling,PaymentMethod,MonthlyCharges,TotalCharges
+9851-KIELU,Male,0,No,No,10.0,Yes,No,Fiber optic,Yes,Yes,Yes,Yes,Yes,Yes,Month-to-month,Yes,Electronic check,110.1,1043.3
+3292-PBZEJ,Male,1,No,No,11.0,Yes,Yes,Fiber optic,No,Yes,Yes,Yes,Yes,Yes,Month-to-month,Yes,Electronic check,111.4,1183.05
+3680-CTHUH,Male,0,No,No,60.0,Yes,Yes,Fiber optic,Yes,Yes,Yes,Yes,Yes,Yes,One year,Yes,Credit card (automatic),116.6,7049.5
+3893-JRNFS,Male,0,No,No,68.0,No,No phone service,DSL,No,No,Yes,No,No,Yes,Month-to-month,Yes,Bank transfer (automatic),39.9,2796.35
+3115-CZMZD,Male,0,No,Yes,0.0,Yes,No,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,Two year,No,Mailed check,20.25,2206.057681365576
+2923-ARZLG,Male,0,Yes,Yes,0.0,Yes,No,No,No internet service,No internet service,No internet service,No internet service,No internet service,No internet service,One year,Yes,Mailed check,19.7,2206.057681365576
+9286-BHDQG,Male,0,Yes,Yes,72.0,No,No phone service,DSL,Yes,Yes,Yes,Yes,No,No,Two year,No,Credit card (automatic),45.25,3139.8
+9610-WCESF,Male,0,No,No,67.0,No,No phone service,DSL,Yes,No,No,Yes,Yes,No,Two year,No,Electronic check,43.9,3097.2
+3511-BFTJW,Male,0,Yes,Yes,72.0,No,No phone service,DSL,Yes,Yes,Yes,No,No,No,Two year,No,Credit card (automatic),38.5,2763.0
