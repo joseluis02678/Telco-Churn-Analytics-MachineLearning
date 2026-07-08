@@ -1,6 +1,4 @@
-<h1 align="center">
-📉 Telco Customer Churn Prediction & Customer Segmentation
-</h1>
+<h1 align="center">📉 Telco Customer Churn Prediction & Customer Segmentation</h1>
 
 <p align="center">
 Machine Learning • Customer Analytics • Customer Segmentation • Business Intelligence
@@ -11,262 +9,213 @@ Machine Learning • Customer Analytics • Customer Segmentation • Business I
 <img src="https://img.shields.io/badge/Pandas-Data%20Analysis-150458?logo=pandas">
 <img src="https://img.shields.io/badge/NumPy-Numerical-013243?logo=numpy">
 <img src="https://img.shields.io/badge/Scikit--Learn-ML-F7931E?logo=scikitlearn">
+<img src="https://img.shields.io/badge/imbalanced--learn-SMOTE--Tomek-red">
 <img src="https://img.shields.io/badge/Matplotlib-Visualization-blue">
 <img src="https://img.shields.io/badge/License-MIT-green">
 </p>
 
+<p align="center">
+  <a href="#-descripción">Descripción</a> •
+  <a href="#-contexto-del-problema">Contexto</a> •
+  <a href="#-objetivos">Objetivos</a> •
+  <a href="#-workflow-del-proyecto">Workflow</a> •
+  <a href="#-resultados-clave">Resultados</a> •
+  <a href="#-cómo-ejecutar-el-proyecto">Ejecución</a>
+</p>
+
 ---
 
-### 📖 Descripción
+## 📖 Descripción
 
 Este proyecto desarrolla una solución integral de **Machine Learning** para analizar y predecir el abandono de clientes (*Customer Churn*) en una empresa de telecomunicaciones.
 
-Además del modelo predictivo, se implementa una estrategia de segmentación mediante técnicas de reducción de dimensionalidad y clustering con el objetivo de identificar perfiles de clientes y apoyar la toma de decisiones orientadas a la retención.
+Además del modelo predictivo, se implementa una estrategia de **segmentación de clientes** mediante técnicas de reducción de dimensionalidad (PCA + MCA) y clustering (K-Means), con el objetivo de identificar perfiles de clientes y apoyar la toma de decisiones orientadas a la retención.
 
-El proyecto cubre todas las etapas de un flujo de Ciencia de Datos, desde el entendimiento del problema de negocio hasta la construcción, evaluación e interpretación del modelo final.
-
----
-
-### 📌 Contexto del problema
-
-Durante el periodo analizado, la empresa experimentó un incremento en la tasa de abandono de clientes, pasando del **2% al 2.5%** debido al impacto generado por la pandemia del COVID-19.
-
-Considerando que adquirir un nuevo cliente resulta significativamente más costoso que conservar uno existente, surge la necesidad de desarrollar un modelo capaz de identificar anticipadamente a los clientes con mayor probabilidad de abandonar la compañía y generar estrategias de retención más eficientes.
+El proyecto cubre todas las etapas de un flujo de Ciencia de Datos, desde el entendimiento del negocio hasta la construcción, evaluación e interpretación comparativa de tres modelos de clasificación.
 
 ---
 
-### 🎯 Objetivos
+## 📌 Contexto del problema
 
-- Analizar los factores relacionados con el abandono de clientes.
-- Construir un modelo predictivo de Customer Churn.
-- Identificar segmentos de clientes con características similares.
-- Obtener información útil para apoyar decisiones de negocio.
-- Generar recomendaciones para estrategias de fidelización.
+Durante el periodo analizado, la empresa experimentó un incremento en la tasa de abandono de clientes debido, en parte, al impacto generado por la pandemia del COVID-19.
+
+Dado que adquirir un nuevo cliente resulta significativamente más costoso que conservar uno existente, surge la necesidad de un modelo capaz de **identificar anticipadamente** a los clientes con mayor probabilidad de abandonar la compañía, así como de segmentarlos para diseñar estrategias de retención más eficientes y focalizadas.
 
 ---
 
-### 🛠 Tecnologías utilizadas
+## 🎯 Objetivos
+
+- Analizar los factores asociados al abandono de clientes (*churn*).
+- Construir y comparar modelos predictivos de clasificación binaria.
+- Identificar segmentos de clientes con perfiles de riesgo diferenciados.
+- Generar información accionable para el área de marketing y retención.
+- Formular recomendaciones de negocio basadas en evidencia estadística.
+
+---
+
+## 🗂️ Dataset
+
+- **Fuente:** Telco Customer Churn (estructura tipo IBM/Kaggle).
+- **Variable objetivo:** `Churn` (Yes / No).
+- **Variables:** información demográfica (género, adultos mayores, dependientes), contractuales (tipo de contrato, método de pago, facturación electrónica) y de consumo (`tenure`, `MonthlyCharges`, `TotalCharges`, servicios contratados).
+- **Partición:** división Train/Test aplicada antes de cualquier tratamiento, con reproducción idéntica del pipeline de limpieza en ambos conjuntos para evitar fuga de información (*data leakage*).
+
+---
+
+## 🛠 Tecnologías utilizadas
 
 <p align="center">
-
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="55"/>
-
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" width="55"/>
-
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" width="55"/>
-
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" width="55"/>
-
-<img src="https://matplotlib.org/_static/images/logo2.svg" width="120"/>
-
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="50"/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" width="50"/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" width="50"/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" width="50"/>
+<img src="https://matplotlib.org/_static/images/logo2.svg" width="110"/>
 </p>
 
-- Python
-- Pandas
-- NumPy
-- Scikit-Learn
-- SciPy
-- Matplotlib
-- Seaborn
+| Categoría | Librerías |
+|---|---|
+| Manipulación de datos | `pandas`, `numpy` |
+| Modelado / preprocesamiento | `scikit-learn` |
+| Balanceo de clases | `imbalanced-learn` (SMOTE, SMOTE-Tomek) |
+| Análisis multivariado categórico | `prince` (MCA) |
+| Estadística | `scipy` |
+| Scorecards / WOE-IV | `scorecardpy` |
+| Visualización | `matplotlib`, `seaborn` |
 
 ---
 
-## 🔄 Workflow del Proyecto
+## 🔄 Workflow del proyecto
 
 ```text
-Business Understanding
-        │
-        ▼
-Machine Learning Canvas
-        │
-        ▼
-Exploratory Data Analysis (EDA)
-        │
-        ▼
-Data Cleaning & Preprocessing
-        │
-        ▼
-Missing Value Imputation
-        │
-        ▼
-Outlier Detection
-(Mahalanobis • Isolation Forest • Grubbs • DBSCAN)
-        │
-        ▼
-Feature Engineering
-        │
-        ▼
-Association Analysis
-(Cramér's V)
-        │
-        ▼
-Dimensionality Reduction
-(PCA + MCA)
-        │
-        ▼
-Customer Segmentation
-(K-Means)
-        │
-        ▼
-Balanced Random Forest
-        │
-        ▼
-Model Evaluation
-(ROC AUC • Lift • Confusion Matrix)
-        │
-        ▼
-Business Insights & Conclusions
+Business Understanding + Machine Learning Canvas
+                │
+                ▼
+        Train / Test Split
+                │
+                ▼
+   Exploratory Data Analysis (EDA)
+                │
+                ▼
+  Data Cleaning & Missing Value Imputation
+                │
+                ▼
+      Multivariate Outlier Detection
+ (Mahalanobis • Isolation Forest • Grubbs • DBSCAN)
+                │
+                ▼
+   Association Analysis (Cramér's V) + IV / WOE
+                │
+                ▼
+     Dimensionality Reduction (PCA + MCA)
+                │
+                ▼
+   Customer Segmentation (K-Means, k=4)
+                │
+                ▼
+ Modeling: Logistic Regression • CART • Random Forest
+        (baseline vs. SMOTE-Tomek balanced)
+                │
+                ▼
+Model Evaluation (ROC AUC • Gini • KS • Lift • Confusion Matrix)
+                │
+                ▼
+      Business Insights & Recommendations
 ```
 
 ---
 
-## 📂 Contenido del Notebook
+## 📂 Contenido del notebook
 
-### 📌 1. Comprensión del negocio
+### 1. Comprensión del negocio
+Definición del problema, diccionario de variables y desarrollo del **Machine Learning Canvas** que guía el proyecto.
 
-Se define el problema de negocio, los objetivos del proyecto y el impacto económico que representa el abandono de clientes.
+### 2. Análisis exploratorio de datos (EDA)
+Estadísticas descriptivas y visualizaciones univariadas para variables numéricas y categóricas, además del análisis del balance de la variable objetivo.
 
-También se desarrolla el **Machine Learning Canvas**, estableciendo los elementos que guían todo el proceso analítico.
+### 3. Limpieza y preparación de datos
+Corrección de tipos, imputación de valores faltantes (con análisis de dependencia previo, evitando reglas automáticas ingenuas), codificación de variables categóricas y escalamiento.
 
----
-
-### 📌 2. Análisis Exploratorio de Datos (EDA)
-
-Durante esta etapa se estudia el comportamiento general del conjunto de datos mediante estadísticas descriptivas y visualizaciones.
-
-Se analizan:
-
-- Distribución de variables.
-- Variables numéricas y categóricas.
-- Relación entre variables.
-- Balance de la variable objetivo.
-- Patrones asociados al abandono.
-
----
-
-### 📌 3. Limpieza y preparación de datos
-
-Antes del modelado se realizan diferentes tareas de preprocesamiento:
-
-- Corrección de tipos de datos.
-- Tratamiento de valores faltantes.
-- Imputación de **TotalCharges**.
-- Codificación de variables categóricas.
-- Escalamiento de variables numéricas.
-
----
-
-### 📌 4. Detección de valores atípicos
-
-Se emplean diferentes algoritmos para detectar observaciones anómalas.
-
-Los métodos utilizados fueron:
-
+### 4. Detección de valores atípicos multivariados
+Se aplican y comparan cuatro métodos, tomando la decisión final por **consenso** entre ellos:
 - Distancia de Mahalanobis
 - Isolation Forest
 - Test de Grubbs
 - DBSCAN
 
-La decisión final se obtiene considerando el consenso entre los diferentes métodos.
+### 5. Ingeniería de características y asociación
+Creación de variables derivadas (p. ej. relación gasto/tiempo, valor del cliente) y evaluación de asociación con `Churn` mediante el **coeficiente V de Cramér** e **Information Value (IV)**.
+
+### 6. Reducción de dimensionalidad
+- **PCA** sobre variables numéricas (`tenure`, `MonthlyCharges`, `TotalCharges`), generando componentes interpretables como *valor del cliente* y *relación gasto vs. permanencia*.
+- **MCA** sobre variables categóricas (tipo de contrato, servicios, forma de pago, etc.).
+
+### 7. Segmentación de clientes
+**K-Means** sobre las componentes de PCA + MCA. El número óptimo de clusters (**k = 4**) se valida con el método del codo y el coeficiente de silueta, y se confirma su estabilidad al proyectar el modelo entrenado sobre el conjunto de test.
+
+### 8. Modelado predictivo
+Se entrenan y comparan tres algoritmos, tanto en su versión original (datos desbalanceados) como balanceada con **SMOTE-Tomek**:
+- Regresión Logística Binaria
+- Árbol de Decisión (CART), con poda vía `ccp_alpha`
+- Random Forest
+
+### 9. Evaluación del modelo
+Comparación sistemática mediante ROC AUC, Gini, KS, Lift, matriz de confusión y métricas por clase, evaluando en particular el trade-off entre precisión y recall sobre la clase minoritaria (*churn*).
 
 ---
 
-### 📌 5. Ingeniería de características
+## 📊 Resultados clave
 
-Se generan nuevas variables que representan de mejor manera el comportamiento de los clientes y aumentan la capacidad predictiva del modelo.
+**Segmentación de clientes (K-Means, k = 4):**
 
-Además, se evalúa la asociación entre variables mediante el coeficiente **V de Cramér**.
+| Cluster | % Churn | Perfil |
+|---|---:|---|
+| 0 | ~1% | Clientes muy fidelizados, contratos largos |
+| 1 | ~13–15% | Riesgo bajo a moderado |
+| 2 | **~45–46%** | **Alto riesgo — segmento prioritario de retención** |
+| 3 | ~11–14% | Estables con señales de riesgo |
 
----
+La estructura de los cuatro clusters se mantuvo estable al validarse sobre el conjunto de test, confirmando la robustez de la segmentación.
 
-### 📌 6. Reducción de dimensionalidad
+**Modelo predictivo — mejor desempeño (Random Forest balanceado):**
 
-Para sintetizar la información se implementan dos técnicas complementarias.
+| Métrica | Train | Test |
+|---|---:|---:|
+| ROC AUC | ~0.88 | **~0.84** |
+| Accuracy | ~0.80 | ~0.79 |
 
-#### PCA
+> El modelo mantiene un desempeño estable entre train y test (sin sobreajuste evidente) y conserva una buena capacidad para identificar clientes en riesgo de churn tras el balanceo con SMOTE-Tomek.
 
-Aplicado sobre variables numéricas para construir componentes relacionados con:
-
-- Valor del cliente.
-- Relación entre gasto y permanencia.
-
-#### MCA
-
-Aplicado sobre variables categóricas para representar las categorías en un espacio reducido de dimensiones.
-
----
-
-### 📌 7. Segmentación de clientes
-
-Se implementa un modelo **K-Means** sobre las componentes obtenidas mediante PCA y MCA.
-
-El análisis permite identificar **cuatro segmentos** de clientes con perfiles claramente diferenciados.
-
-Uno de los grupos presenta una tasa de abandono cercana al **46%**, convirtiéndose en el segmento prioritario para estrategias de retención.
+Se comparó además el desempeño de Regresión Logística y CART (con y sin balanceo), observando en todos los casos la mejora en el *recall* de la clase minoritaria al aplicar SMOTE-Tomek, a costa de una ligera reducción en *precision* — un trade-off relevante para el diseño de campañas de retención.
 
 ---
 
-### 📌 8. Modelo predictivo
-
-Se desarrolla un modelo de **Balanced Random Forest**, seleccionado por su capacidad para trabajar con clases desbalanceadas.
-
-El proceso incluye:
-
-- División Train/Test.
-- Entrenamiento.
-- Predicción.
-- Evaluación del desempeño.
-
----
-
-### 📌 9. Evaluación del modelo
-
-El desempeño del modelo se evalúa utilizando diferentes métricas de clasificación.
-
-| Métrica | Resultado |
-|---------|----------:|
-| ROC AUC | **0.84** |
-| Lift (Top 10%) | **2.89** |
-| Clusters | **4** |
-| Cluster de mayor riesgo | **46% Churn** |
-
----
-
-### ⭐ Técnicas implementadas
+## ⭐ Técnicas implementadas
 
 - Machine Learning Canvas
 - Exploratory Data Analysis (EDA)
-- Missing Value Imputation
-- Outlier Detection
-- Mahalanobis Distance
-- Isolation Forest
-- Grubbs Test
-- DBSCAN
+- Missing Value Imputation (basada en análisis de dependencia)
+- Detección multivariada de outliers: Mahalanobis, Isolation Forest, Grubbs, DBSCAN
 - Feature Engineering
-- Cramér's V
+- Cramér's V / Information Value (IV) / Weight of Evidence (WOE)
 - Principal Component Analysis (PCA)
 - Multiple Correspondence Analysis (MCA)
-- K-Means Clustering
-- Balanced Random Forest
-- Model Evaluation
-- Lift Analysis
-- Business Insights
+- K-Means Clustering (validado con Elbow + Silhouette)
+- Regresión Logística, CART (con poda por `ccp_alpha`), Random Forest
+- Balanceo de clases con SMOTE-Tomek
+- Evaluación: ROC AUC, Gini, KS, Lift, Matriz de Confusión, MCC
 
 ---
 
-### 💼 Valor para el negocio
+## 💼 Valor para el negocio
 
-Este proyecto permite:
-
-- Detectar clientes con alta probabilidad de abandono.
-- Priorizar campañas de retención.
-- Optimizar recursos comerciales.
-- Identificar segmentos de clientes con diferentes perfiles de riesgo.
-- Apoyar la toma de decisiones basada en datos.
+- Identifica clientes con alta probabilidad de abandono antes de que ocurra.
+- Prioriza campañas de retención sobre el segmento de mayor riesgo (~46% de churn).
+- Optimiza la asignación de recursos comerciales mediante segmentación accionable.
+- Provee una base analítica reproducible para futuras iteraciones del modelo.
 
 ---
 
-### 📁 Estructura del repositorio
+## 📁 Estructura del repositorio
 
 ```text
 Telco-Churn-Analytics/
@@ -282,28 +231,30 @@ Telco-Churn-Analytics/
 
 ---
 
-### 🚀 Cómo ejecutar el proyecto
+## 🚀 Cómo ejecutar el proyecto
 
 ```bash
 git clone https://github.com/tu-usuario/Telco-Churn-Analytics.git
-```
-
-```bash
+cd Telco-Churn-Analytics
 pip install -r requirements.txt
 ```
 
-Finalmente, abre el notebook ubicado en la carpeta **notebooks** y ejecuta las celdas en orden.
+Luego abre el notebook ubicado en `notebooks/` y ejecuta las celdas en orden.
 
 ---
 
-### 👨‍💻 Autores
+## 👨‍💻 Autores
 
-**Jose Luis Garay Ramos**
-
-Estudiante de Ingeniería Estadística e Informática  
+**José Luis Garay Ramos**
+Estudiante de Ingeniería Estadística e Informática
 Universidad Nacional Agraria La Molina
 
-**Diana Chavez**
-
-Estudiante de Ingenería de Software
+**Diana Valeri Chavez Palomino**
+Estudiante de Ingeniería de Software
 Universidad Nacional de Ingeniería
+
+---
+
+## 📄 Licencia
+
+Este proyecto se distribuye bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
