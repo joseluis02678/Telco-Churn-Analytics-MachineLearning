@@ -1,5 +1,5 @@
 <h1 align="center">
-📉 Telco Customer Churn Prediction
+Telco Customer Churn Prediction
 </h1>
 
 <p align="center">
