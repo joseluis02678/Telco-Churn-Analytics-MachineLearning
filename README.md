@@ -1,9 +1,13 @@
 <h1 align="center">
-Telco Customer Churn Prediction using Machine Learning
+📉 Telco Customer Churn Prediction
 </h1>
 
 <p align="center">
-Machine Learning • Customer Analytics • Customer Segmentation • Business Intelligence
+End-to-End Machine Learning Pipeline for Customer Retention and Segmentation
+</p>
+
+<p align="center">
+From Business Understanding to Predictive Modeling and Business Insights
 </p>
 
 <p align="center">
