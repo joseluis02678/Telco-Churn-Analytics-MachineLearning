@@ -1,4 +1,6 @@
-<h1 align="center">📉 Telco Customer Churn Prediction & Customer Segmentation</h1>
+<p align="center">
+Customer Segmentation • Predictive Analytics • Business Intelligence
+</p>
 
 <p align="center">
 Machine Learning • Customer Analytics • Customer Segmentation • Business Intelligence
