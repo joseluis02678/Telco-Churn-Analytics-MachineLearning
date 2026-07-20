@@ -1,266 +1,227 @@
 <h1 align="center">
-Telco Customer Churn Prediction
+  Telco Churn Prediction API
 </h1>
 
 <p align="center">
-End-to-End Machine Learning Pipeline for Customer Retention and Segmentation
+  <strong>Production-Ready Machine Learning Microservice</strong><br>
+  REST API built with FastAPI, Docker, and Scikit-Learn for real-time customer churn prediction.
 </p>
 
 <p align="center">
-From Business Understanding to Predictive Modeling and Business Insights
+  <img src="https://img.shields.io/badge/Python-3.10+-blue?logo=python" alt="Python">
+  <img src="https://img.shields.io/badge/FastAPI-005571?logo=fastapi" alt="FastAPI">
+  <img src="https://img.shields.io/badge/Docker-2496ED?logo=docker" alt="Docker">
+  <img src="https://img.shields.io/badge/Scikit--Learn-F7931E?logo=scikitlearn" alt="Scikit-Learn">
+  <img src="https://img.shields.io/badge/License-MIT-green" alt="License">
 </p>
 
 <p align="center">
-<img src="https://img.shields.io/badge/Python-3.x-blue?logo=python">
-<img src="https://img.shields.io/badge/Pandas-Data%20Analysis-150458?logo=pandas">
-<img src="https://img.shields.io/badge/NumPy-Numerical-013243?logo=numpy">
-<img src="https://img.shields.io/badge/Scikit--Learn-ML-F7931E?logo=scikitlearn">
-<img src="https://img.shields.io/badge/imbalanced--learn-SMOTE--Tomek-red">
-<img src="https://img.shields.io/badge/Matplotlib-Visualization-blue">
-<img src="https://img.shields.io/badge/License-MIT-green">
-</p>
-
-<p align="center">
-  <a href="#-descripción">Descripción</a> •
-  <a href="#-contexto-del-problema">Contexto</a> •
-  <a href="#-objetivos">Objetivos</a> •
-  <a href="#-workflow-del-proyecto">Workflow</a> •
-  <a href="#-resultados-clave">Resultados</a> •
-  <a href="#-cómo-ejecutar-el-proyecto">Ejecución</a>
+  <a href="#-deployment-roadmap">Roadmap</a> •
+  <a href="#-system-architecture">Architecture</a> •
+  <a href="#-project-structure">Structure</a> •
+  <a href="#-rest-api-endpoints">API Endpoints</a> •
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-docker-deployment">Docker</a>
 </p>
 
 ---
 
-## 📖 Descripción
+## 🚀 Deployment Roadmap
 
-Este proyecto desarrolla una solución integral de **Machine Learning** para analizar y predecir el abandono de clientes (*Customer Churn*) en una empresa de telecomunicaciones.
+This branch is dedicated to transforming the trained Machine Learning model into a scalable, production-ready microservice.
 
-Además del modelo predictivo, se implementa una estrategia de **segmentación de clientes** mediante técnicas de reducción de dimensionalidad (PCA + MCA) y clustering (K-Means), con el objetivo de identificar perfiles de clientes y apoyar la toma de decisiones orientadas a la retención.
-
-El proyecto cubre todas las etapas de un flujo de Ciencia de Datos, desde el entendimiento del negocio hasta la construcción, evaluación e interpretación comparativa de tres modelos de clasificación.
-
----
-
-## 📌 Contexto del problema
-
-Durante el periodo analizado, la empresa experimentó un incremento en la tasa de abandono de clientes debido, en parte, al impacto generado por la pandemia del COVID-19.
-
-Dado que adquirir un nuevo cliente resulta significativamente más costoso que conservar uno existente, surge la necesidad de un modelo capaz de **identificar anticipadamente** a los clientes con mayor probabilidad de abandonar la compañía, así como de segmentarlos para diseñar estrategias de retención más eficientes y focalizadas.
-
----
-
-## 🎯 Objetivos
-
-- Analizar los factores asociados al abandono de clientes (*churn*).
-- Construir y comparar modelos predictivos de clasificación binaria.
-- Identificar segmentos de clientes con perfiles de riesgo diferenciados.
-- Generar información accionable para el área de marketing y retención.
-- Formular recomendaciones de negocio basadas en evidencia estadística.
+- [x] Machine Learning model trained & validated (Random Forest + SMOTE-Tomek)
+- [x] Feature engineering pipeline replicated for inference
+- [x] Model serialization (`.joblib` artifacts)
+- [x] FastAPI REST API implementation
+- [x] Pydantic data validation & schemas
+- [x] Swagger UI auto-documentation
+- [x] Docker containerization (`Dockerfile` & `docker-compose.yml`)
+- [ ] CI/CD Pipeline (GitHub Actions)
+- [ ] Cloud Deployment (Render / Railway)
+- [ ] Monitoring & Logging (Prometheus / Grafana)
 
 ---
 
-## 🗂️ Dataset
+## 🏗️ System Architecture
 
-- **Fuente:** Telco Customer Churn (estructura tipo IBM/Kaggle).
-- **Variable objetivo:** `Churn` (Yes / No).
-- **Variables:** información demográfica (género, adultos mayores, dependientes), contractuales (tipo de contrato, método de pago, facturación electrónica) y de consumo (`tenure`, `MonthlyCharges`, `TotalCharges`, servicios contratados).
-- **Partición:** división Train/Test aplicada antes de cualquier tratamiento, con reproducción idéntica del pipeline de limpieza en ambos conjuntos para evitar fuga de información (*data leakage*).
-
----
-
-## 🛠 Tecnologías utilizadas
-
-<p align="center">
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="50"/>
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" width="50"/>
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" width="50"/>
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" width="50"/>
-<img src="https://matplotlib.org/_static/images/logo2.svg" width="110"/>
-</p>
-
-| Categoría | Librerías |
-|---|---|
-| Manipulación de datos | `pandas`, `numpy` |
-| Modelado / preprocesamiento | `scikit-learn` |
-| Balanceo de clases | `imbalanced-learn` (SMOTE, SMOTE-Tomek) |
-| Análisis multivariado categórico | `prince` (MCA) |
-| Estadística | `scipy` |
-| Scorecards / WOE-IV | `scorecardpy` |
-| Visualización | `matplotlib`, `seaborn` |
-
----
-
-## 🔄 Workflow del proyecto
+The system is designed as a stateless microservice. The heavy lifting of training is done offline; the API only handles inference.
 
 ```text
-Business Understanding + Machine Learning Canvas
-                │
-                ▼
-        Train / Test Split
-                │
-                ▼
-   Exploratory Data Analysis (EDA)
-                │
-                ▼
-  Data Cleaning & Missing Value Imputation
-                │
-                ▼
-      Multivariate Outlier Detection
- (Mahalanobis • Isolation Forest • Grubbs • DBSCAN)
-                │
-                ▼
-   Association Analysis (Cramér's V) + IV / WOE
-                │
-                ▼
-     Dimensionality Reduction (PCA + MCA)
-                │
-                ▼
-   Customer Segmentation (K-Means, k=4)
-                │
-                ▼
- Modeling: Logistic Regression • CART • Random Forest
-        (baseline vs. SMOTE-Tomek balanced)
-                │
-                ▼
-Model Evaluation (ROC AUC • Gini • KS • Lift • Confusion Matrix)
-                │
-                ▼
-      Business Insights & Recommendations
+┌─────────────────┐      POST /predict      ┌──────────────────────────────┐
+│   Client /      │ ──────────────────────> │      FastAPI Server          │
+│   Frontend      │ <────────────────────── │  (Uvicorn ASGI)              │
+└─────────────────┘    JSON Response        └──────────────┬───────────────┘
+                                                             │
+                               ┌─────────────────────────────┼─────────────────────────────┐
+                               ▼                              ▼                              ▼
+                      ┌────────────────┐             ┌────────────────┐             ┌────────────────┐
+                      │ Pydantic       │             │ Preprocessing  │             │ ML Model       │
+                      │ Validation     │────────────>│ Pipeline       │────────────>│ (.joblib)      │
+                      │ (schemas.py)   │             │ (Scaling, OHE) │             │ Random Forest  │
+                      └────────────────┘             └────────────────┘             └────────────────┘
 ```
 
 ---
 
-## 📂 Contenido del notebook
+## 📁 Project Structure
 
-### 1. Comprensión del negocio
-Definición del problema, diccionario de variables y desarrollo del **Machine Learning Canvas** que guía el proyecto.
-
-### 2. Análisis exploratorio de datos (EDA)
-Estadísticas descriptivas y visualizaciones univariadas para variables numéricas y categóricas, además del análisis del balance de la variable objetivo.
-
-### 3. Limpieza y preparación de datos
-Corrección de tipos, imputación de valores faltantes (con análisis de dependencia previo, evitando reglas automáticas ingenuas), codificación de variables categóricas y escalamiento.
-
-### 4. Detección de valores atípicos multivariados
-Se aplican y comparan cuatro métodos, tomando la decisión final por **consenso** entre ellos:
-- Distancia de Mahalanobis
-- Isolation Forest
-- Test de Grubbs
-- DBSCAN
-
-### 5. Ingeniería de características y asociación
-Creación de variables derivadas (p. ej. relación gasto/tiempo, valor del cliente) y evaluación de asociación con `Churn` mediante el **coeficiente V de Cramér** e **Information Value (IV)**.
-
-### 6. Reducción de dimensionalidad
-- **PCA** sobre variables numéricas (`tenure`, `MonthlyCharges`, `TotalCharges`), generando componentes interpretables como *valor del cliente* y *relación gasto vs. permanencia*.
-- **MCA** sobre variables categóricas (tipo de contrato, servicios, forma de pago, etc.).
-
-### 7. Segmentación de clientes
-**K-Means** sobre las componentes de PCA + MCA. El número óptimo de clusters (**k = 4**) se valida con el método del codo y el coeficiente de silueta, y se confirma su estabilidad al proyectar el modelo entrenado sobre el conjunto de test.
-
-### 8. Modelado predictivo
-Se entrenan y comparan tres algoritmos, tanto en su versión original (datos desbalanceados) como balanceada con **SMOTE-Tomek**:
-- Regresión Logística Binaria
-- Árbol de Decisión (CART), con poda vía `ccp_alpha`
-- Random Forest
-
-### 9. Evaluación del modelo
-Comparación sistemática mediante ROC AUC, Gini, KS, Lift, matriz de confusión y métricas por clase, evaluando en particular el trade-off entre precisión y recall sobre la clase minoritaria (*churn*).
-
----
-
-## 📊 Resultados clave
-
-**Segmentación de clientes (K-Means, k = 4):**
-
-| Cluster | % Churn | Perfil |
-|---|---:|---|
-| 0 | ~1% | Clientes muy fidelizados, contratos largos |
-| 1 | ~13–15% | Riesgo bajo a moderado |
-| 2 | **~45–46%** | **Alto riesgo — segmento prioritario de retención** |
-| 3 | ~11–14% | Estables con señales de riesgo |
-
-La estructura de los cuatro clusters se mantuvo estable al validarse sobre el conjunto de test, confirmando la robustez de la segmentación.
-
-**Modelo predictivo — mejor desempeño (Random Forest balanceado):**
-
-| Métrica | Train | Test |
-|---|---:|---:|
-| ROC AUC | ~0.88 | **~0.84** |
-| Accuracy | ~0.80 | ~0.79 |
-
-> El modelo mantiene un desempeño estable entre train y test (sin sobreajuste evidente) y conserva una buena capacidad para identificar clientes en riesgo de churn tras el balanceo con SMOTE-Tomek.
-
-Se comparó además el desempeño de Regresión Logística y CART (con y sin balanceo), observando en todos los casos la mejora en el *recall* de la clase minoritaria al aplicar SMOTE-Tomek, a costa de una ligera reducción en *precision* — un trade-off relevante para el diseño de campañas de retención.
-
----
-
-## ⭐ Técnicas implementadas
-
-- Machine Learning Canvas
-- Exploratory Data Analysis (EDA)
-- Missing Value Imputation (basada en análisis de dependencia)
-- Detección multivariada de outliers: Mahalanobis, Isolation Forest, Grubbs, DBSCAN
-- Feature Engineering
-- Cramér's V / Information Value (IV) / Weight of Evidence (WOE)
-- Principal Component Analysis (PCA)
-- Multiple Correspondence Analysis (MCA)
-- K-Means Clustering (validado con Elbow + Silhouette)
-- Regresión Logística, CART (con poda por `ccp_alpha`), Random Forest
-- Balanceo de clases con SMOTE-Tomek
-- Evaluación: ROC AUC, Gini, KS, Lift, Matriz de Confusión, MCC
-
----
-
-## 💼 Valor para el negocio
-
-- Identifica clientes con alta probabilidad de abandono antes de que ocurra.
-- Prioriza campañas de retención sobre el segmento de mayor riesgo (~46% de churn).
-- Optimiza la asignación de recursos comerciales mediante segmentación accionable.
-- Provee una base analítica reproducible para futuras iteraciones del modelo.
-
----
-
-## 📁 Estructura del repositorio
+The repository is organized following modern MLOps best practices, separating application logic, model artifacts, and infrastructure.
 
 ```text
-Telco-Churn-Analytics/
+Telco-Churn-Analytics-MachineLearning/
 │
-├── data/
-├── notebooks/
-│   └── Trabajo_final_Módulo_5_4_2.ipynb
-├── images/
-├── requirements.txt
-├── README.md
-└── LICENSE
+├── app/                        # Core application logic
+│   ├── __init__.py
+│   ├── main.py                 # FastAPI entry point & routes
+│   ├── schemas.py              # Pydantic models for request/response
+│   ├── predict.py              # Inference logic & model loading
+│   └── utils.py                # Helper functions (e.g., preprocessing)
+│
+├── models/                     # Serialized ML artifacts
+│   ├── random_forest.joblib
+│   ├── scaler.joblib
+│   └── encoder.joblib
+│
+├── data/                       # Sample data for testing (optional)
+│
+├── tests/                      # Unit and integration tests
+│   └── test_api.py
+│
+├── .github/
+│   └── workflows/              # CI/CD pipelines (GitHub Actions)
+│       └── deploy.yml
+│
+├── Dockerfile                  # Container build instructions
+├── docker-compose.yml          # Multi-container orchestration
+├── requirements.txt            # Python dependencies
+├── .env.example                # Environment variables template
+├── .gitignore
+└── README.md
 ```
 
 ---
 
-## 🚀 Cómo ejecutar el proyecto
+## 🌐 REST API Endpoints
+
+Once the server is running, the API exposes the following endpoints:
+
+| Method | Endpoint   | Description                                                        | Auth |
+| :----- | :--------- | :------------------------------------------------------------------ | :--- |
+| GET    | `/`        | Root endpoint, API status & version                                 | No   |
+| GET    | `/health`  | Liveness/Readiness check for orchestrators                          | No   |
+| POST   | `/predict` | Main inference endpoint. Expects customer features, returns churn probability & risk level. | No   |
+| GET    | `/docs`    | Interactive Swagger UI documentation                                | No   |
+| GET    | `/redoc`   | Alternative ReDoc documentation                                     | No   |
+
+### Example Request (`/predict`)
+
+```json
+{
+  "gender": "Female",
+  "SeniorCitizen": 0,
+  "Partner": "Yes",
+  "Dependents": "No",
+  "tenure": 12,
+  "PhoneService": "Yes",
+  "Contract": "Month-to-month",
+  "MonthlyCharges": 70.35,
+  "TotalCharges": 845.5
+}
+```
+
+### Example Response
+
+```json
+{
+  "churn_prediction": "Yes",
+  "churn_probability": 0.83,
+  "risk_level": "High"
+}
+```
+
+---
+
+## 🛠️ Tech Stack
+
+| Category          | Technologies                                              |
+| :----------------- | :---------------------------------------------------------- |
+| Backend            | Python 3.10+, FastAPI, Uvicorn                              |
+| Machine Learning    | Scikit-Learn, imbalanced-learn (SMOTE-Tomek), Pandas, NumPy |
+| Validation         | Pydantic V2                                                  |
+| Containerization    | Docker, Docker Compose                                       |
+| CI/CD & Cloud       | GitHub Actions, Render / Railway (Pending)                  |
+
+---
+
+## ⚡ Quick Start (Local Development)
+
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/tu-usuario/Telco-Churn-Analytics.git
-cd Telco-Churn-Analytics
+git clone https://github.com/<your-username>/Telco-Churn-Analytics-MachineLearning.git
+cd Telco-Churn-Analytics-MachineLearning
+```
+
+### 2. Create a virtual environment
+
+```bash
+python -m venv venv
+source venv/bin/activate   # On Windows: venv\Scripts\activate
+```
+
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-Luego abre el notebook ubicado en `notebooks/` y ejecuta las celdas en orden.
+### 4. Run the FastAPI server
+
+```bash
+uvicorn app.main:app --reload
+```
+
+> 💡 **Tip:** Open your browser and go to `http://localhost:8000/docs` to interact with the auto-generated Swagger UI.
 
 ---
 
-## 👨‍💻 Autores
+## 🐳 Docker Deployment
 
-**José Luis Garay Ramos**
-Estudiante de Ingeniería Estadística e Informática
-Universidad Nacional Agraria La Molina
+The application is fully containerized for consistent deployment across any environment.
 
-**Diana Valeri Chavez Palomino**
-Estudiante de Ingeniería de Software
-Universidad Nacional de Ingeniería
+### Build the image
+
+```bash
+docker build -t telco-churn-api .
+```
+
+### Run the container
+
+```bash
+docker run -p 8000:8000 telco-churn-api
+```
+
+### Or use Docker Compose (Recommended)
+
+```bash
+docker-compose up --build
+```
+
+The API will be available at `http://localhost:8000`.
 
 ---
 
-## 📄 Licencia
+## ☁️ Cloud Deployment Strategy
 
-Este proyecto se distribuye bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+This project is designed to be easily deployed to PaaS providers:
+
+**Render / Railway:**
+- Connect the GitHub repository.
+- Set the build command: `pip install -r requirements.txt`
+- Set the start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+- Add environment variables (e.g., `MODEL_PATH`).
+
+**AWS ECS / GCP Cloud Run:**
+- Push the Docker image to ECR / Artifact Registry.
+- Deploy the container with auto-scaling rules.
