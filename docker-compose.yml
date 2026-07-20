@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_PATH=/app/models/random_forest.joblib
+    volumes:
+      - ./models:/app/models
+    restart: unless-stopped
