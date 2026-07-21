@@ -15,10 +15,7 @@ if root_dir not in sys.path:
 try:
     from training.train import PCAFeatureEngineer
 except ImportError:
-    try:
-        from training.train_test import PCAFeatureEngineer
-    except ImportError:
-        raise ImportError("No se pudo encontrar PCAFeatureEngineer. Asegúrate de que el archivo exista en la carpeta 'training/'.")
+    raise ImportError("No se pudo encontrar PCAFeatureEngineer. Asegúrate de que el archivo exista en la carpeta 'training/'.")
 
 # 3. 🚨 TRUCO CRÍTICO PARA JOBLIB 🚨
 # Como la clase se guardó cuando el script se ejecutó como '__main__',
