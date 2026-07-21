@@ -18,8 +18,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Cargar modelo (ajusta la ruta según donde guardes tus modelos)
-MODEL_PATH = os.getenv("MODEL_PATH", "models/random_forest.joblib")
+# Cargar modelo (ajustado para coincidir con training/train.py)
+MODEL_PATH = os.getenv("MODEL_PATH", "models/churn_logreg_pipeline.joblib")
 predictor = ChurnPredictor(MODEL_PATH)
 
 @app.get("/")

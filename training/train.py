@@ -41,6 +41,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(BASE_DIR, "..", "data", "TelcoCustomerChurn.csv")
 MODEL_PATH = os.path.join(BASE_DIR, "..", "models", "churn_logreg_pipeline.joblib")
 
+# Variables que SÍ usa el modelo (13 en total)
 NUM_VARS_RAW = ["tenure", "MonthlyCharges", "TotalCharges"]
 CAT_VARS = [  # seleccionadas por Cramér's V >= 0.19 frente a Churn
     "Contract", "OnlineSecurity", "TechSupport", "InternetService",
@@ -158,22 +159,26 @@ class PCAFeatureEngineer(BaseEstimator, TransformerMixin):
         self.scaler = StandardScaler()
         self.pca = PCA(n_components=2, random_state=RANDOM_STATE)
 
-    def _as_df(self, X):
-        if isinstance(X, pd.DataFrame):
-            return X[NUM_VARS_RAW]
-        return pd.DataFrame(np.asarray(X), columns=NUM_VARS_RAW)
-
     def fit(self, X, y=None):
-        Xdf = self._as_df(X)
+        if isinstance(X, pd.DataFrame):
+            Xdf = X[NUM_VARS_RAW]
+        else:
+            Xdf = pd.DataFrame(np.asarray(X), columns=NUM_VARS_RAW)
         self.pca.fit(self.scaler.fit_transform(Xdf))
         return self
 
     def transform(self, X):
-        Xdf = self._as_df(X)
+        if isinstance(X, pd.DataFrame):
+            Xdf = X[NUM_VARS_RAW].copy()
+            idx = Xdf.index
+        else:
+            Xdf = pd.DataFrame(np.asarray(X), columns=NUM_VARS_RAW)
+            idx = range(len(Xdf))
+        
         comps = self.pca.transform(self.scaler.transform(Xdf))
         return pd.DataFrame(
             {"GastoVsTiempo": comps[:, 1], "tenure": Xdf["tenure"].values, "ValorCliente": comps[:, 0]},
-            index=Xdf.index,
+            index=idx,
         )
 
     def get_feature_names_out(self, input_features=None):
@@ -187,7 +192,8 @@ def build_pipeline() -> ImbPipeline:
     preprocessor = ColumnTransformer(transformers=[
         ("num", PCAFeatureEngineer(), NUM_VARS_RAW),
         ("cat", OneHotEncoder(handle_unknown="ignore", sparse_output=False), CAT_VARS),
-    ])
+    ], remainder="drop") # drop asegura que no pasen columnas no deseadas
+    
     return ImbPipeline(steps=[
         ("preprocess", preprocessor),
         ("scale", StandardScaler()),
@@ -201,7 +207,7 @@ def build_pipeline() -> ImbPipeline:
 # ------------------------------------------------------------------
 def full_metrics(y_true, y_pred, y_proba) -> dict:
     tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
-    specificity = tn / (tn + fp)
+    specificity = tn / (tn + fp) if (tn + fp) > 0 else 0.0
     auc = roc_auc_score(y_true, y_proba)
     gini = 2 * auc - 1
 
@@ -211,8 +217,10 @@ def full_metrics(y_true, y_pred, y_proba) -> dict:
     dfp = pd.DataFrame({"y": y_true, "score": y_proba}).sort_values("score", ascending=False)
     top10 = dfp.head(int(len(dfp) * 0.10))
     top20 = dfp.head(int(len(dfp) * 0.20))
-    lift10 = top10["y"].mean() / dfp["y"].mean()
-    lift20 = top20["y"].mean() / dfp["y"].mean()
+    
+    mean_y = dfp["y"].mean()
+    lift10 = top10["y"].mean() / mean_y if mean_y > 0 else 0.0
+    lift20 = top20["y"].mean() / mean_y if mean_y > 0 else 0.0
 
     return {
         "Accuracy": accuracy_score(y_true, y_pred),
@@ -271,7 +279,7 @@ def train_and_evaluate(df: pd.DataFrame):
 def save_model(pipeline: ImbPipeline, path: str = MODEL_PATH) -> None:
     os.makedirs(os.path.dirname(path), exist_ok=True)
     joblib.dump(pipeline, path)
-    print(f"\nModelo guardado en: {path}")
+    print(f"\n✅ Modelo guardado exitosamente en: {path}")
 
 
 def load_model(path: str = MODEL_PATH) -> ImbPipeline:
@@ -279,33 +287,57 @@ def load_model(path: str = MODEL_PATH) -> ImbPipeline:
 
 
 # ------------------------------------------------------------------
-# 8. PREDICCIÓN SOBRE NUEVOS CLIENTES
+# 8. PREDICCIÓN SOBRE NUEVOS CLIENTES (CORREGIDO)
 # ------------------------------------------------------------------
 def predict_churn(pipeline: ImbPipeline, new_data: dict) -> dict:
+    """
+    Realiza predicción sobre un nuevo cliente.
+    new_data debe contener SOLO las 13 variables que usa el modelo.
+    """
+    # Asegurar tipos correctos para las variables numéricas
+    new_data["tenure"] = float(new_data["tenure"])
+    new_data["MonthlyCharges"] = float(new_data["MonthlyCharges"])
+    new_data["TotalCharges"] = float(new_data["TotalCharges"])
+    
     df_new = pd.DataFrame([new_data])
     proba = float(pipeline.predict_proba(df_new)[0, 1])
     pred = "Yes" if proba >= 0.5 else "No"
     risk = "Alto" if proba >= 0.6 else "Medio" if proba >= 0.3 else "Bajo"
-    return {"churn_prediction": pred, "churn_probability": round(proba, 4), "risk_level": risk}
+    
+    return {
+        "churn_prediction": pred, 
+        "churn_probability": round(proba, 4), 
+        "risk_level": risk
+    }
 
 
 # ------------------------------------------------------------------
-# 9. MAIN
+# 9. MAIN (CORREGIDO)
 # ------------------------------------------------------------------
 if __name__ == "__main__":
+    print("🚀 Iniciando pipeline de entrenamiento...")
     df = load_data()
     quick_eda(df)
 
     model, (X_test, y_test) = train_and_evaluate(df)
     save_model(model)
 
+    # Ejemplo con SOLO las 13 variables que usa el modelo
     ejemplo = {
-        "gender": "Female", "SeniorCitizen": 0, "Partner": "Yes", "Dependents": "No",
-        "tenure": 12, "PhoneService": "Yes", "MultipleLines": "No",
-        "InternetService": "Fiber optic", "OnlineSecurity": "No", "OnlineBackup": "No",
-        "DeviceProtection": "No", "TechSupport": "No", "StreamingTV": "No",
-        "StreamingMovies": "No", "Contract": "Month-to-month", "PaperlessBilling": "Yes",
-        "PaymentMethod": "Electronic check", "MonthlyCharges": 70.35, "TotalCharges": 845.5,
+        "tenure": 12,
+        "MonthlyCharges": 70.35,
+        "TotalCharges": 845.5,
+        "Contract": "Month-to-month",
+        "OnlineSecurity": "No",
+        "TechSupport": "No",
+        "InternetService": "Fiber optic",
+        "PaymentMethod": "Electronic check",
+        "OnlineBackup": "No",
+        "DeviceProtection": "No",
+        "StreamingMovies": "No",
+        "StreamingTV": "No",
+        "PaperlessBilling": "Yes"
     }
+    
     print("\n=== Ejemplo de predicción ===")
     print(predict_churn(model, ejemplo))
