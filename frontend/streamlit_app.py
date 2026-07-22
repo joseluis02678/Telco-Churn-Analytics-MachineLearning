@@ -99,12 +99,9 @@ st.write(
 
 
 if check_backend():
-    st.success("Backend conectado correctamente.")
+    st.success(f"Backend conectado correctamente: {API_URL}")
 else:
-    st.error(
-        "No se pudo conectar con FastAPI. "
-        "Ejecuta primero el backend en http://localhost:8000."
-    )
+    st.error(f"No se pudo conectar con FastAPI: {API_URL}")
 
 
 with st.form("customer_form"):
