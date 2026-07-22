@@ -39,7 +39,7 @@ This branch is dedicated to transforming the trained Machine Learning model into
 - [x] Swagger UI auto-documentation
 - [x] Docker containerization (`Dockerfile` & `docker-compose.yml`)
 - [ ] CI/CD Pipeline (GitHub Actions)
-- [ ] Cloud Deployment (Render / Railway)
+- [x] Cloud Deployment (Render / Railway)
 - [ ] Monitoring & Logging (Prometheus / Grafana)
 
 ---
@@ -261,6 +261,36 @@ This project is designed to be easily deployed to PaaS providers:
 - Set the build command: `pip install -r requirements.txt`
 - Set the start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
 - Add environment variables (e.g., `MODEL_PATH=models/churn_logreg_pipeline.joblib`).
+
+---
+
+## 🌐 Live Deployment
+
+### Backend API (Production)
+
+The FastAPI backend is deployed and available at:
+
+🔗 **API Base URL**
+
+https://telco-churn-analytics-machinelearning.onrender.com
+
+### Interactive API Documentation (Swagger UI)
+
+Explore and test the endpoints directly:
+
+🔗 **Swagger Docs**
+
+https://telco-churn-analytics-machinelearning.onrender.com/docs
+
+### Health Check
+
+Verify that the API is running:
+
+🔗 **Health Endpoint**
+
+https://telco-churn-analytics-machinelearning.onrender.com/health
+
+> Frontend deployment will be added in a future update.
 
 **AWS ECS / GCP Cloud Run:**
 - Push the Docker image to ECR / Artifact Registry.
