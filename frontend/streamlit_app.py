@@ -4,7 +4,10 @@ import requests
 import streamlit as st
 
 
-API_URL = os.getenv("API_URL", "https://telco-churn-analytics-machinelearning.onrender.com")
+API_URL = os.getenv(
+    "API_URL",
+    "https://telco-churn-analytics-machinelearning.onrender.com"
+)
 
 
 st.set_page_config(
@@ -13,6 +16,7 @@ st.set_page_config(
     layout="wide"
 )
 
+st.write("API usada:", API_URL)
 
 def check_backend() -> bool:
     """Comprueba si el backend FastAPI está disponible."""
